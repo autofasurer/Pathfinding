@@ -102,6 +102,7 @@ for (int i = 0; i < tiles.size(); i++){
 			noWalls.push_back(i);
 		}
 	}
+	findCost = 0;
 	setStart();
 }
 
