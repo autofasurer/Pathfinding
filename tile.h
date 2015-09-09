@@ -15,7 +15,7 @@
 class tile{
 public:
     //constructor
-    tile();
+    tile(int i);
     //methods
     void draw();
     void update();
@@ -26,6 +26,7 @@ public:
     int cost;
     ofPoint pos;
     int tileSize;
+    int index;
     ofColor color;
     
 private:

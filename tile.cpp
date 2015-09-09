@@ -8,12 +8,13 @@
 
 #include "tile.h"
 
-tile::tile(){ //constructor
+tile::tile(int i){ //constructor
     pos.set(0, 0, 0);
     tileSize = 10;
     wall = 0;
     start = goal = false;
-    cost = NULL; 
+    cost = -1;
+    index = i;
 }
 void update(){
     
