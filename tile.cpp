@@ -12,12 +12,14 @@ tile::tile(){ //constructor
     pos.set(0, 0, 0);
     tileSize = 10;
     wall = 0;
+    start = goal = false;
+    cost = NULL; 
 }
 void update(){
     
 }
 
 void tile::draw(){
-    ofSetColor(!wall*255);
+    ofSetColor(color);
     ofRect(pos.x, pos.y, tileSize, tileSize);
 }

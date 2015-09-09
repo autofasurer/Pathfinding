@@ -21,8 +21,12 @@ public:
     void update();
     //variables
     bool wall;
+    bool start;
+    bool goal;
+    int cost;
     ofPoint pos;
     int tileSize;
+    ofColor color;
     
 private:
 };
