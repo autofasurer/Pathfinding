@@ -190,24 +190,28 @@ void ofApp::step(){
 	if (tiles[startIndex-1].cost < playerDistance && tiles[startIndex-1].cost > -1){
 		player = tiles[startIndex-1].pos;
 		playerDistance = tiles[startIndex-1].cost;
+		tiles[startIndex-1].color = ofColor(255,255,0);
 		startIndex = startIndex-1;
 		return;
 	}
 	if (tiles[startIndex+1].cost < playerDistance && tiles[startIndex+1].cost > -1){
 		player = tiles[startIndex+1].pos;
 		playerDistance = tiles[startIndex+1].cost;
+		tiles[startIndex+1].color = ofColor(255,255,0);
 		startIndex = startIndex+1;
 		return;
 	}
 	if (tiles[startIndex-gridsize].cost < playerDistance && tiles[startIndex-gridsize].cost > -1){
 		player = tiles[startIndex-gridsize].pos;
 		playerDistance = tiles[startIndex-gridsize].cost;
+		tiles[startIndex-gridsize].color = ofColor(255,255,0);
 		startIndex = startIndex-gridsize;
 		return;
 	}
 	if (tiles[startIndex+gridsize].cost < playerDistance && tiles[startIndex+gridsize].cost > -1){
 		player = tiles[startIndex+gridsize].pos;
 		playerDistance = tiles[startIndex+gridsize].cost;
+		tiles[startIndex+gridsize].color = ofColor(255,255,0);
 		startIndex = startIndex+gridsize;
 		return;
 	}
