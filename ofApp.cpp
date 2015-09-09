@@ -4,7 +4,7 @@
 void ofApp::setup(){
     gridsize = 48;
     tileSize = 20;
-	drawCost = false;
+	drawCost = true;
 	findCost = 0;
 	controlNumber = 0;
     createRandomGrid(gridsize);
