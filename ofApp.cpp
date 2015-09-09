@@ -26,7 +26,9 @@ void ofApp::draw(){
 		if (drawCost){
 		stringstream ss;
 		ss << tiles[i].cost ;
+			if (!tiles[i].wall){
 		ofDrawBitmapString(ss.str().c_str(), tiles[i].pos.x, (tiles[i].pos.y+tileSize));
+			}
 		}
     }
     //draw the player
@@ -44,6 +46,9 @@ void ofApp::keyPressed(int key){
     }
 	else if (key == 'c'){
 		calculateCost();
+	}
+	else if (key == 's'){
+		step();
 	}
 }
 
@@ -106,7 +111,6 @@ void ofApp::setStart(){
     int randomSquare = (int) ofRandom(0, noWalls.size());
     
     tiles[noWalls[randomSquare]].start = true;
-    // tiles[noWalls[randomSquare]].color = ofColor(255,0,0);
     player = tiles[noWalls[randomSquare]].pos;
 	startIndex = tiles[noWalls[randomSquare]].index;
     setGoal();
@@ -121,14 +125,11 @@ void ofApp::setGoal(){
         goalIndex = tiles[noWalls[randomSquare]].index;
     }
     else {setGoal();}
-    //calculateCost();
 }
 
 //--------------------------------------------------------------
 void ofApp::calculateCost(){
     tiles[goalIndex].cost = 0;
-	//int findCost = 0;
-	//do{
 	for (int i = 0; i < tiles.size(); i++){
 		if (tiles[i].cost == findCost){
 			if (!tiles[i-1].wall && (tiles[i-1].cost == -1)){
@@ -146,8 +147,9 @@ void ofApp::calculateCost(){
 		}
 	}
     findCost++;
-	//}
-	//while (findCost < 100);//
+	if (tiles[startIndex].cost != -1){
+		playerDistance = tiles[startIndex].cost;
+	}
 }
 
 
@@ -179,12 +181,37 @@ void ofApp::checkWalls(int i){
 				tiles[i+gridsize].wall = false;
 				return;
 			}
-		//controlNumber += 1;
-		//cout << controlNumber << endl;
-	}
+		}
 
 }
 
+//--------------------------------------------------------------
+void ofApp::step(){
+	if (tiles[startIndex-1].cost < playerDistance && tiles[startIndex-1].cost > -1){
+		player = tiles[startIndex-1].pos;
+		playerDistance = tiles[startIndex-1].cost;
+		startIndex = startIndex-1;
+		return;
+	}
+	if (tiles[startIndex+1].cost < playerDistance && tiles[startIndex+1].cost > -1){
+		player = tiles[startIndex+1].pos;
+		playerDistance = tiles[startIndex+1].cost;
+		startIndex = startIndex+1;
+		return;
+	}
+	if (tiles[startIndex-gridsize].cost < playerDistance && tiles[startIndex-gridsize].cost > -1){
+		player = tiles[startIndex-gridsize].pos;
+		playerDistance = tiles[startIndex-gridsize].cost;
+		startIndex = startIndex-gridsize;
+		return;
+	}
+	if (tiles[startIndex+gridsize].cost < playerDistance && tiles[startIndex+gridsize].cost > -1){
+		player = tiles[startIndex+gridsize].pos;
+		playerDistance = tiles[startIndex+gridsize].cost;
+		startIndex = startIndex+gridsize;
+		return;
+	}
+}
 
 
 
